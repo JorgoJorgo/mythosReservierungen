@@ -1,27 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
 import newReservationForm from './components/newReservationForm';
-import { Form, Button, Card , Container, Navbar } from 'react-bootstrap';
+import { Form, Button, Card , Container, Navbar, Accordion } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { CalendarComponent } from '@syncfusion/ej2-react-calendars';
+import { CalendarComponent , ChangedEventArgs } from '@syncfusion/ej2-react-calendars';
 import NewReservationForm from './components/newReservationForm';
 //https://ej2.syncfusion.com/react/documentation/api/calendar/overview/
-function App() {
+// das Beispiel zum Kalendar https://ej2.syncfusion.com/react/demos/?utm_source=npm&utm_campaign=calendar#/material/calendar/default
+function App(this: any) {
   const [logInStatus , setLogIn] = useState(false);
   const [userName , setUserName] = useState("");
   const [password , setPassword] = useState("")
   const [selectedDate , setSelectedDate] = useState(new Date ())
-  const handleCalenderClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const div = event.currentTarget;
-    console.log(
-      
-    );
-  };
 
-  function getYesterdayDate() : string{
-    const a = new Date(new Date().getTime() - 24*60*60*1000);
-    
-    return a.toLocaleDateString()
+  function onchange(args: ChangedEventArgs): void {
+    setSelectedDate(args.value!!)
   }
   
   return (
@@ -34,7 +27,6 @@ function App() {
           <Form.Label>Name</Form.Label>
           <Form.Control type="email" placeholder="Nutzername" onChange={(event)=> setUserName(event.target.value)}/>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Passwort" name="password" onChange={(event)=> setPassword(event.target.value)} />
@@ -63,15 +55,17 @@ function App() {
           className='middle'
           min={new Date()}
           value = {new Date()}
-          onClick={(event) =>  
-            {
-                console.log(this.value)
-            }
-          }
-          onChange={console.log("hallo")}
+          change={onchange}
           />
         <hr/>
-        <NewReservationForm date= {getYesterdayDate()}></NewReservationForm>
+        <Accordion defaultActiveKey="1">
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>Neue Reservierung</Accordion.Header>
+            <Accordion.Body>
+            <NewReservationForm date={selectedDate.toLocaleDateString()} user={userName}></NewReservationForm>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
       </Container>
       
     }
