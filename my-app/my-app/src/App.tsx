@@ -58,7 +58,7 @@ function App(this: any) {
           change={onchange}
           />
         <hr/>
-        <Accordion defaultActiveKey="1">
+        <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="1">
             <Accordion.Header>Neue Reservierung</Accordion.Header>
             <Accordion.Body>
@@ -67,7 +67,6 @@ function App(this: any) {
           </Accordion.Item>
         </Accordion>
       </Container>
-      
     }
     </React.Fragment>
   );
