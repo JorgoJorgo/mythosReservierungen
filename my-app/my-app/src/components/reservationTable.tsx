@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 import { Button, Card, Form} from 'react-bootstrap';
 import Table from 'react-bootstrap/Table'
+import ReservationRow from './reservationRow';
 
-interface reservation {
+export interface reservation {
     date: string;
     user: string;
     table : string;
     guests: string;
     time : string;
+    name: string;
 }
 
 function ReservationTable(/*props: formProps*/) {
@@ -16,19 +18,22 @@ function ReservationTable(/*props: formProps*/) {
         user: "Jorgo",
         table : "14",
         guests: "23",
-        time : "17:45"
+        time : "17:45",
+        name: "Karamoussanlis"
         },
         {date : "12.12.12",
         user: "Jorgo",
         table : "14",
         guests: "23",
-        time : "17:45"
+        time : "17:45",
+        name: "Karamoussanlis"
         },
         {date : "12.12.12",
         user: "Jorgo",
         table : "14",
         guests: "23",
-        time : "17:45"
+        time : "17:45",
+        name: "Karamoussanlis"
         }
     ]
     return (
@@ -42,12 +47,7 @@ function ReservationTable(/*props: formProps*/) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>19:30</td>
-                    <td>Karamoussanlis</td>
-                    <td>30</td>
-                    <td>24</td>
-                </tr>
+                <ReservationRow name={mockReservations[0].name} date={mockReservations[0].date} user={mockReservations[0].user} table={mockReservations[0].table} guests={mockReservations[0].guests} time={mockReservations[0].time}/>
                 <tr>
                     <td>19:30</td>
                     <td>Karamoussanlis</td>
